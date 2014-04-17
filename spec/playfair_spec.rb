@@ -35,17 +35,20 @@ end
 describe Alphabet do
 let(:alphabet) {Alphabet.new(keyword: KEYWORD)}
  
-it "should mark used characters as true" do
+  it "should mark used characters as true" do
     alphabet.is_char_valid?('e').should be_false
+  end
+  it "should mark letters used in the keyword as invalid" do
+    alphabet.is_char_valid?('p').should be_false
   end
 end
 
 describe PlayFairCrypter do
-  pf = PlayFairMatrix.new
-  matrix = pf.build_matrix(keyword: KEYWORD)
+  matrix = PlayFairMatrix.new(keyword: KEYWORD)
   let(:play_fair) {PlayFairCrypter.new(matrix: matrix)}
+
 context "When encrypting a message" do
-  it "should encrypt using PlayFair cypher" do
+  it "should return a correctly formatted message encrypted using PlayFair cypher" do
     encrypted_message = play_fair.encrypt(message: MESSAGE)
     encrypted_message.should == ENCRYPTED_MESSAGE
   end
@@ -53,8 +56,7 @@ end
 end
 
 describe PlayFairCrypter do
-  pf = PlayFairMatrix.new
-  matrix = pf.build_matrix(keyword: KEYWORD)
+  matrix = PlayFairMatrix.new(keyword: KEYWORD)
   let(:play_fair) {PlayFairCrypter.new(matrix: matrix)}
 
   context "when decrypting a message" do

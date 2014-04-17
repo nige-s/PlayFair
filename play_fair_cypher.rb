@@ -7,8 +7,7 @@ NOT_ENCRYPTED = "Not Encrypted"
 
   def initialize(options={})
     @keyword = options[:keyword] || DEF_KEYWORD
-    @matrix_builder = PlayFairMatrix.new
-    @matrix = @matrix_builder.build_matrix(keyword: @keyword) unless @keyword == DEF_KEYWORD
+    @matrix = PlayFairMatrix.new(keyword: @keyword)
     @crypter = PlayFairCrypter.new(matrix: @matrix)    
   end
 

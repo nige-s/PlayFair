@@ -5,11 +5,11 @@ class Alphabet
   end
 
   def initialize_hash(options={})
-    @alphabet = {'A' => true,'B' => true,'C' => true,'D' => true,'E' => true,'F' => true,
+    @alphabet ||= {'A' => true,'B' => true,'C' => true,'D' => true,'E' => true,'F' => true,
       'G' => true, 'H' => true,'K' => true,'L' => true,'M' => true,
       'N' => true, 'O' => true,'P' => true,'Q' => true,'R' => true,'S' => true,
       'T' => true, 'U' => true,'V' => true,'W' => true,'X' => true,'Y' => true, 
-      'Z' => true}
+      'Z' => true} 
     if options[:keyword]
       key_letters = options[:keyword].upcase.split(//)
       key_letters.each {|char| @alphabet[char] = false}

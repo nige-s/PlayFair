@@ -2,18 +2,44 @@ require_relative "Alphabet"
 
 class PlayFairMatrix
   COLUMNS = 5
-
-  def initialise(options={})
+  attr_reader :matrix
+  def initialize(options={})
     if options[:keyword]
       keyword = options[:keyword]
-      build_matrix(keyword: keyword)
+      @matrix = build_matrix(keyword: keyword)
     else
-      build_matrix
+      @matrix = build_matrix
     end
   end
 
+  def char_from_index(options={})
+    row = options[:row]
+    column = options[:column]
+    @matrix[row][column]
+  end
+
+  def chars_matrix_location(options={})
+    char_array = options[:char_pair].split(//)
+    char_location = { char1: {row: :p, index: 0, encrypted: '' }, char2:  {row: :p, index: 0, encrypted: '' }}
+    @matrix.each do |key, val_array|
+    index = 0
+       val_array.each do |char|
+	 if char_array[0] == char
+           char_location[:char1][:row] = key
+	   char_location[:char1][:index] = index 
+	 end
+	 if char_array[1] == char
+           char_location[:char2][:row] = key
+	   char_location[:char2][:index] = index 
+	 end
+	 index += 1
+      end
+    end
+    char_location
+  end
+  
   def build_matrix(options = {})
-   @grid = if options[:keyword]
+   if options[:keyword]
              build_keyword_matrix(options[:keyword])
            else
               {A: ['P','L','A','Y','F'],
