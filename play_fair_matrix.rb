@@ -5,8 +5,7 @@ class PlayFairMatrix
   attr_reader :matrix
   def initialize(options={})
     if options[:keyword]
-      keyword = options[:keyword]
-      @matrix = build_matrix(keyword: keyword)
+      @matrix = build_matrix(keyword: options[:keyword])  
     else
       @matrix = build_matrix
     end
@@ -44,9 +43,9 @@ class PlayFairMatrix
            else
               {A: ['P','L','A','Y','F'],
                B: ['R','I','E','X','M'],
-	       C: ['B','C','D','G','H'],
-	       D: ['K','N','O','Q','S'],
- 	       E: ['T','U','V','W','Z']}
+               C: ['B','C','D','G','H'],
+               D: ['K','N','O','Q','S'],
+               E: ['T','U','V','W','Z']}
            end
   end
 
